@@ -92,7 +92,7 @@ var doc = `{
                         "BearerToken": []
                     }
                 ],
-                "description": "create new Product  Category",
+                "description": "create new Product Category",
                 "produces": [
                     "application/json"
                 ],
@@ -102,7 +102,7 @@ var doc = `{
                 "summary": "Create Product Category",
                 "parameters": [
                     {
-                        "description": "the body to create new age rating category",
+                        "description": "the body to create new category",
                         "name": "Body",
                         "in": "body",
                         "required": true,

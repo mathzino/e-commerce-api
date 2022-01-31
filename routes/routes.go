@@ -5,6 +5,7 @@ import (
 	"gorm.io/gorm"
 
 	"fp/controllers"
+	"fp/middlewares"
 
 	swaggerFiles "github.com/swaggo/files"     // swagger embed files
 	ginSwagger "github.com/swaggo/gin-swagger" // gin-swagger middleware
@@ -31,14 +32,14 @@ func SetupRouter(db *gorm.DB) *gin.Engine {
     // moviesMiddlewareRoute.DELETE("/:id", controllers.DeleteMovie)
 
     r.GET("/product-categories", controllers.GetAllProductCategory)
-    // r.GET("/age-rating-categories/:id", controllers.GetRatingById)
+    r.GET("/product-categories/:id", controllers.GetCategoryById)
     // r.GET("/age-rating-categories/:id/movies", controllers.GetMoviesByRatingId)
 
-    // ratingMiddlewareRoute := r.Group("/age-rating-categories")
-    // ratingMiddlewareRoute.Use(middlewares.JwtAuthMiddleware())
-    // ratingMiddlewareRoute.POST("/", controllers.CreateRating)
-    // ratingMiddlewareRoute.PATCH("/:id", controllers.UpdateRating)
-    // ratingMiddlewareRoute.DELETE("/:id", controllers.DeleteRating)
+    categoryMiddlewareRoute := r.Group("/product-categories")
+    categoryMiddlewareRoute.Use(middlewares.JwtAuthMiddleware())
+    categoryMiddlewareRoute.POST("/", controllers.CreateCategory)
+    categoryMiddlewareRoute.PATCH("/:id", controllers.UpdateCategory)
+    categoryMiddlewareRoute.DELETE("/:id", controllers.DeleteProductCategory)
 
     r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 

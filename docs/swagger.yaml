@@ -85,9 +85,9 @@ paths:
       tags:
       - ProductCategory
     post:
-      description: create new Product  Category
+      description: create new Product Category
       parameters:
-      - description: the body to create new age rating category
+      - description: the body to create new category
         in: body
         name: Body
         required: true

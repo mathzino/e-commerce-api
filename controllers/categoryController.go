@@ -31,10 +31,10 @@ func GetAllProductCategory(c *gin.Context) {
 }
 
 // Create a Category godoc
-// @Summary Create Product Category 
-// @Description create new Product  Category
+// @Summary Create Product Category
+// @Description create new Product Category
 // @Tags ProductCategory
-// @Param Body body productCategoryInput true "the body to create new age rating category"
+// @Param Body body productCategoryInput true "the body to create new category"
 // @Param Authorization header string true "Authorization. How to input in swagger : 'Bearer <insert_your_token_here>'"
 // @Security BearerToken
 // @Produce json
