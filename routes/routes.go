@@ -30,7 +30,7 @@ func SetupRouter(db *gorm.DB) *gin.Engine {
     // moviesMiddlewareRoute.POST("/", controllers.CreateMovie)
     // moviesMiddlewareRoute.PATCH("/:id", controllers.UpdateMovie)
     // moviesMiddlewareRoute.DELETE("/:id", controllers.DeleteMovie)
-
+//category
     r.GET("/product-categories", controllers.GetAllProductCategory)
     r.GET("/product-categories/:id", controllers.GetCategoryById)
     // r.GET("/age-rating-categories/:id/movies", controllers.GetMoviesByRatingId)
@@ -40,7 +40,15 @@ func SetupRouter(db *gorm.DB) *gin.Engine {
     categoryMiddlewareRoute.POST("/", controllers.CreateCategory)
     categoryMiddlewareRoute.PATCH("/:id", controllers.UpdateCategory)
     categoryMiddlewareRoute.DELETE("/:id", controllers.DeleteProductCategory)
-
+    //product
+    r.GET("/product", controllers.GetAllProduct)
+    r.GET("/product/:id", controllers.GetProductById)
+    //with auth
+    productMiddlewareRoute := r.Group("/product")
+    productMiddlewareRoute.Use(middlewares.JwtAuthMiddleware())
+    productMiddlewareRoute.POST("/", controllers.CreateProduct)
+    productMiddlewareRoute.PATCH("/:id", controllers.UpdateProduct)
+    productMiddlewareRoute.DELETE("/:id", controllers.DeleteProduct)
     r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 
     return r
