@@ -41,7 +41,7 @@ func SetupRouter(db *gorm.DB) *gin.Engine {
     categoryMiddlewareRoute.PATCH("/:id", controllers.UpdateCategory)
     categoryMiddlewareRoute.DELETE("/:id", controllers.DeleteProductCategory)
 
-    r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
+    r.GET("/", ginSwagger.WrapHandler(swaggerFiles.Handler))
 
     return r
 }
