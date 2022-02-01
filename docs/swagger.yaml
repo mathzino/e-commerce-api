@@ -27,6 +27,38 @@ definitions:
       name:
         type: string
     type: object
+  controllers.productInput:
+    properties:
+      description:
+        type: string
+      image:
+        type: string
+      name:
+        type: string
+      price:
+        type: string
+      product_category_id:
+        type: integer
+    type: object
+  models.Product:
+    properties:
+      created_at:
+        type: string
+      description:
+        type: string
+      id:
+        type: integer
+      image:
+        type: string
+      name:
+        type: string
+      price:
+        type: string
+      productCategoryID:
+        type: integer
+      updated_at:
+        type: string
+    type: object
   models.ProductCategory:
     properties:
       created_at:
@@ -69,6 +101,33 @@ paths:
       summary: Login as as user.
       tags:
       - Auth
+  /product:
+    post:
+      description: create new Product
+      parameters:
+      - description: the body to create new product
+        in: body
+        name: Body
+        required: true
+        schema:
+          $ref: '#/definitions/controllers.productInput'
+      - description: 'Authorization. How to input in swagger : ''Bearer <insert_your_token_here>'''
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Product'
+      security:
+      - BearerToken: []
+      summary: Create Product
+      tags:
+      - Product
   /product-categories:
     get:
       description: Get a list of ProductCategory.
@@ -173,6 +232,69 @@ paths:
       summary: Update ProductCategory.
       tags:
       - ProductCategory
+  /product/{id}:
+    delete:
+      description: Delete a Product by id.
+      parameters:
+      - description: ProductCategory id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: boolean
+            type: object
+      summary: Delete one Product.
+      tags:
+      - Product
+    get:
+      description: Get an Productby id.
+      parameters:
+      - description: Product id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Product'
+      summary: Get Product.
+      tags:
+      - Product
+    patch:
+      description: Update Product by id.
+      parameters:
+      - description: Product id
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: the body to update product
+        in: body
+        name: Body
+        required: true
+        schema:
+          $ref: '#/definitions/controllers.productInput'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Product'
+      summary: Update Product.
+      tags:
+      - Product
   /register:
     post:
       description: registering a user from public access.
