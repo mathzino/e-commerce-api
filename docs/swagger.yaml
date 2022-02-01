@@ -187,6 +187,11 @@ paths:
     delete:
       description: Delete a ProductCategory by id.
       parameters:
+      - description: 'Authorization. How to input in swagger : ''Bearer <insert_your_token_here>'''
+        in: header
+        name: Authorization
+        required: true
+        type: string
       - description: ProductCategory id
         in: path
         name: id
@@ -201,6 +206,8 @@ paths:
             additionalProperties:
               type: boolean
             type: object
+      security:
+      - BearerToken: []
       summary: Delete one ProductCategory.
       tags:
       - ProductCategory
@@ -225,6 +232,11 @@ paths:
     patch:
       description: Update ProductCategory by id.
       parameters:
+      - description: 'Authorization. How to input in swagger : ''Bearer <insert_your_token_here>'''
+        in: header
+        name: Authorization
+        required: true
+        type: string
       - description: ProductCategory id
         in: path
         name: id
@@ -243,6 +255,8 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/models.ProductCategory'
+      security:
+      - BearerToken: []
       summary: Update ProductCategory.
       tags:
       - ProductCategory
@@ -250,6 +264,11 @@ paths:
     delete:
       description: Delete a Product by id.
       parameters:
+      - description: 'Authorization. How to input in swagger : ''Bearer <insert_your_token_here>'''
+        in: header
+        name: Authorization
+        required: true
+        type: string
       - description: ProductCategory id
         in: path
         name: id
@@ -264,6 +283,8 @@ paths:
             additionalProperties:
               type: boolean
             type: object
+      security:
+      - BearerToken: []
       summary: Delete one Product.
       tags:
       - Product
@@ -288,6 +309,11 @@ paths:
     patch:
       description: Update Product by id.
       parameters:
+      - description: 'Authorization. How to input in swagger : ''Bearer <insert_your_token_here>'''
+        in: header
+        name: Authorization
+        required: true
+        type: string
       - description: Product id
         in: path
         name: id
@@ -306,6 +332,8 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/models.Product'
+      security:
+      - BearerToken: []
       summary: Update Product.
       tags:
       - Product

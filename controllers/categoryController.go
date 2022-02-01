@@ -81,6 +81,8 @@ func GetCategoryById(c *gin.Context) { // Get model if exist
 // @Summary Update ProductCategory.
 // @Description Update ProductCategory by id.
 // @Tags ProductCategory
+// @Param Authorization header string true "Authorization. How to input in swagger : 'Bearer <insert_your_token_here>'"
+// @Security BearerToken
 // @Produce json
 // @Param id path string true "ProductCategory id"
 // @Param Body body productCategoryInput true "the body to update product category"
@@ -116,6 +118,8 @@ func UpdateCategory(c *gin.Context) {
 // @Summary Delete one ProductCategory.
 // @Description Delete a ProductCategory by id.
 // @Tags ProductCategory
+// @Param Authorization header string true "Authorization. How to input in swagger : 'Bearer <insert_your_token_here>'"
+// @Security BearerToken
 // @Produce json
 // @Param id path string true "ProductCategory id"
 // @Success 200 {object} map[string]boolean
