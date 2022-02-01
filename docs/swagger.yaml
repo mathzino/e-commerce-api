@@ -102,6 +102,20 @@ paths:
       tags:
       - Auth
   /product:
+    get:
+      description: Get a list of Product.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Product'
+            type: array
+      summary: Get all Product.
+      tags:
+      - Product
     post:
       description: create new Product
       parameters:

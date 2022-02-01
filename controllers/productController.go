@@ -18,13 +18,13 @@ type productInput struct {
     ProductCategoryID   uint `json:"product_category_id"`
 }
 
-// GetAllProductCategory godoc
-// @Summary Get all Product Category.
-// @Description Get a list of ProductCategory.
-// @Tags ProductCategory
+// GetAllProduct godoc
+// @Summary Get all Product.
+// @Description Get a list of Product.
+// @Tags Product
 // @Produce json
-// @Success 200 {object} []models.ProductCategory
-// @Router /product-categories [get]
+// @Success 200 {object} []models.Product
+// @Router /product [get]
 func GetAllProduct(c *gin.Context) {
     // get db from gin context
     db := c.MustGet("db").(*gorm.DB)
