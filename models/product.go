@@ -7,13 +7,13 @@ import (
 type (
     // AgeRatingCategory
     Product struct {
-        ID                  uint               `gorm:"primary_key" json:"id"`
+        ID                  uint              `gorm:"primary_key" json:"id"`
         Name                string            `json:"name"`
         Price 		        string            `json:"price"`
         Image 		        string            `json:"image"`
         Description         string            `json:"description"`
-        ProductCategoryID   uint                `json:"productCategoryID"`
-        SellerID            uint                `json:"sellerID"`
+        ProductCategoryID   uint               `json:"productCategoryID"`
+        SellerID            uint              `json:"sellerID"`
         CreatedAt           time.Time         `json:"created_at"`
         UpdatedAt           time.Time         `json:"updated_at"`
         ProductCategory     ProductCategory   `json:"-"`
