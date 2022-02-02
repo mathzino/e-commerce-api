@@ -16,6 +16,7 @@ type productInput struct {
     Image        		string `json:"image"`
     Description        	string `json:"description"`
     ProductCategoryID   uint `json:"product_category_id"`
+    SellerID   			uint `json:"seller_id"`
 }
 
 // GetAllProduct godoc
@@ -52,7 +53,7 @@ func CreateProduct(c *gin.Context) {
         return
     }
 
-    product := models.Product{Name: input.Name,Price: input.Price,Image: input.Image,Description: input.Description,ProductCategoryID: input.ProductCategoryID}
+    product := models.Product{Name: input.Name,Price: input.Price,Image: input.Image,Description: input.Description,ProductCategoryID: input.ProductCategoryID, SellerID: input.SellerID}
     // get db from gin context
     db := c.MustGet("db").(*gorm.DB)
 
@@ -115,6 +116,7 @@ func UpdateProduct(c *gin.Context) {
 	updatedInput.Image= input.Image
 	updatedInput.Description= input.Description
 	updatedInput.ProductCategoryID= input.ProductCategoryID
+	updatedInput.SellerID= input.SellerID
     updatedInput.UpdatedAt = time.Now()
 
     db.Model(&product).Updates(updatedInput)

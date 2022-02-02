@@ -23,6 +23,7 @@ type (
         Discussion  []Discussion    `json:"-"`
         CartItem    []CartItem      `json:"-"`
         Transaction []Transaction      `json:"-"`
+        Seller      Seller           `json:"-"`
     }
 )
 

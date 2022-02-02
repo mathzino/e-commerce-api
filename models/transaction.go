@@ -12,9 +12,11 @@ type (
 		Status		bool		`json:"status"`
         CartID		uint		`json:"cartID"`
 		UserID		uint		`json:"userID"`
+        SellerID    uint        `json:"sellerID"`
         CreatedAt   time.Time 	`json:"created_at"`
         UpdatedAt   time.Time 	`json:"updated_at"`
         Cart      	Cart   		`json:"-"`
 		User		User		`json:"-"`
+        Seller      Seller      `json:"-"`
     }
 )

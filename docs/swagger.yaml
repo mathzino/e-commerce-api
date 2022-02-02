@@ -39,6 +39,15 @@ definitions:
         type: string
       product_category_id:
         type: integer
+      seller_id:
+        type: integer
+    type: object
+  controllers.sellerInput:
+    properties:
+      store_name:
+        type: string
+      user_id:
+        type: integer
     type: object
   models.Product:
     properties:
@@ -56,6 +65,8 @@ definitions:
         type: string
       productCategoryID:
         type: integer
+      sellerID:
+        type: integer
       updated_at:
         type: string
     type: object
@@ -69,6 +80,19 @@ definitions:
         type: string
       updated_at:
         type: string
+    type: object
+  models.Seller:
+    properties:
+      created_at:
+        type: string
+      id:
+        type: integer
+      store_name:
+        type: string
+      updated_at:
+        type: string
+      userID:
+        type: integer
     type: object
 info:
   contact:
@@ -358,4 +382,122 @@ paths:
       summary: Register a user.
       tags:
       - Auth
+  /seller:
+    get:
+      description: Get a list of Seller.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Product'
+            type: array
+      summary: Get all Seller.
+      tags:
+      - Product
+    post:
+      description: create new Seller
+      parameters:
+      - description: the body to create new seller
+        in: body
+        name: Body
+        required: true
+        schema:
+          $ref: '#/definitions/controllers.sellerInput'
+      - description: 'Authorization. How to input in swagger : ''Bearer <insert_your_token_here>'''
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Seller'
+      security:
+      - BearerToken: []
+      summary: Create Seller
+      tags:
+      - Seller
+  /seller/{id}:
+    delete:
+      description: Delete a Seller by id.
+      parameters:
+      - description: 'Authorization. How to input in swagger : ''Bearer <insert_your_token_here>'''
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: Seller id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: boolean
+            type: object
+      security:
+      - BearerToken: []
+      summary: Delete one Seller.
+      tags:
+      - Product
+    get:
+      description: Get an Seller by id.
+      parameters:
+      - description: Seller id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Seller'
+      summary: Get Seller.
+      tags:
+      - Product
+    patch:
+      description: Update Seller by id.
+      parameters:
+      - description: 'Authorization. How to input in swagger : ''Bearer <insert_your_token_here>'''
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: Seller id
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: the body to update seller
+        in: body
+        name: Body
+        required: true
+        schema:
+          $ref: '#/definitions/controllers.sellerInput'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Seller'
+      security:
+      - BearerToken: []
+      summary: Update Seller.
+      tags:
+      - Seller
 swagger: "2.0"
