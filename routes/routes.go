@@ -49,6 +49,17 @@ func SetupRouter(db *gorm.DB) *gin.Engine {
     productMiddlewareRoute.POST("/", controllers.CreateProduct)
     productMiddlewareRoute.PATCH("/:id", controllers.UpdateProduct)
     productMiddlewareRoute.DELETE("/:id", controllers.DeleteProduct)
+    
+    //seller
+    r.GET("/seller", controllers.GetAllSeleer)
+    r.GET("/seller/:id", controllers.GetSellerById)
+    //with auth
+    SellerMiddlewareRoute := r.Group("/seller")
+    SellerMiddlewareRoute.Use(middlewares.JwtAuthMiddleware())
+    SellerMiddlewareRoute.POST("/", controllers.CreateSeller)
+    SellerMiddlewareRoute.PATCH("/:id", controllers.UpdateSeller)
+    SellerMiddlewareRoute.DELETE("/:id", controllers.DeleteSeller)
+
     r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 
     return r
