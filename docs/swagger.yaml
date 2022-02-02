@@ -22,6 +22,15 @@ definitions:
     - password
     - username
     type: object
+  controllers.discussionInput:
+    properties:
+      discussion_value:
+        type: string
+      product_id:
+        type: integer
+      user_id:
+        type: integer
+    type: object
   controllers.productCategoryInput:
     properties:
       name:
@@ -47,6 +56,21 @@ definitions:
       store_name:
         type: string
       user_id:
+        type: integer
+    type: object
+  models.Discussion:
+    properties:
+      created_at:
+        type: string
+      discussion_value:
+        type: string
+      id:
+        type: integer
+      productID:
+        type: integer
+      updated_at:
+        type: string
+      userID:
         type: integer
     type: object
   models.Product:
@@ -104,6 +128,124 @@ info:
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: http://swagger.io/terms/
 paths:
+  /discussion:
+    get:
+      description: Get a list of Discussion.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Discussion'
+            type: array
+      summary: Get all Discussion.
+      tags:
+      - Discussion
+    post:
+      description: create new Discussion
+      parameters:
+      - description: the body to create new discussion
+        in: body
+        name: Body
+        required: true
+        schema:
+          $ref: '#/definitions/controllers.discussionInput'
+      - description: 'Authorization. How to input in swagger : ''Bearer <insert_your_token_here>'''
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Discussion'
+      security:
+      - BearerToken: []
+      summary: Create Discussion
+      tags:
+      - Discussion
+  /discussion/{id}:
+    delete:
+      description: Delete a Discussion by id.
+      parameters:
+      - description: 'Authorization. How to input in swagger : ''Bearer <insert_your_token_here>'''
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: Discussion id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: boolean
+            type: object
+      security:
+      - BearerToken: []
+      summary: Delete one Discussion.
+      tags:
+      - Discussion
+    get:
+      description: Get an Discussion by id.
+      parameters:
+      - description: Discussion id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Discussion'
+      summary: Get Discussion
+      tags:
+      - Discussion
+    patch:
+      description: Update Discussion by id.
+      parameters:
+      - description: 'Authorization. How to input in swagger : ''Bearer <insert_your_token_here>'''
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: Discussion id
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: the body to update discussion
+        in: body
+        name: Body
+        required: true
+        schema:
+          $ref: '#/definitions/controllers.discussionInput'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Discussion'
+      security:
+      - BearerToken: []
+      summary: Update Discussion.
+      tags:
+      - Discussion
   /login:
     post:
       description: Logging in to get jwt token to access admin or user api by roles.

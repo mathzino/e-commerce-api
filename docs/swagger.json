@@ -13,6 +13,189 @@
         }
     },
     "paths": {
+        "/discussion": {
+            "get": {
+                "description": "Get a list of Discussion.",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Discussion"
+                ],
+                "summary": "Get all Discussion.",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/models.Discussion"
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "security": [
+                    {
+                        "BearerToken": []
+                    }
+                ],
+                "description": "create new Discussion",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Discussion"
+                ],
+                "summary": "Create Discussion",
+                "parameters": [
+                    {
+                        "description": "the body to create new discussion",
+                        "name": "Body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/controllers.discussionInput"
+                        }
+                    },
+                    {
+                        "type": "string",
+                        "description": "Authorization. How to input in swagger : 'Bearer \u003cinsert_your_token_here\u003e'",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.Discussion"
+                        }
+                    }
+                }
+            }
+        },
+        "/discussion/{id}": {
+            "get": {
+                "description": "Get an Discussion by id.",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Discussion"
+                ],
+                "summary": "Get Discussion",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Discussion id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.Discussion"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "security": [
+                    {
+                        "BearerToken": []
+                    }
+                ],
+                "description": "Delete a Discussion by id.",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Discussion"
+                ],
+                "summary": "Delete one Discussion.",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization. How to input in swagger : 'Bearer \u003cinsert_your_token_here\u003e'",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Discussion id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "boolean"
+                            }
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "security": [
+                    {
+                        "BearerToken": []
+                    }
+                ],
+                "description": "Update Discussion by id.",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Discussion"
+                ],
+                "summary": "Update Discussion.",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization. How to input in swagger : 'Bearer \u003cinsert_your_token_here\u003e'",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Discussion id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "the body to update discussion",
+                        "name": "Body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/controllers.discussionInput"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.Discussion"
+                        }
+                    }
+                }
+            }
+        },
         "/login": {
             "post": {
                 "description": "Logging in to get jwt token to access admin or user api by roles.",
@@ -662,6 +845,20 @@
                 }
             }
         },
+        "controllers.discussionInput": {
+            "type": "object",
+            "properties": {
+                "discussion_value": {
+                    "type": "string"
+                },
+                "product_id": {
+                    "type": "integer"
+                },
+                "user_id": {
+                    "type": "integer"
+                }
+            }
+        },
         "controllers.productCategoryInput": {
             "type": "object",
             "properties": {
@@ -700,6 +897,29 @@
                     "type": "string"
                 },
                 "user_id": {
+                    "type": "integer"
+                }
+            }
+        },
+        "models.Discussion": {
+            "type": "object",
+            "properties": {
+                "created_at": {
+                    "type": "string"
+                },
+                "discussion_value": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "productID": {
+                    "type": "integer"
+                },
+                "updated_at": {
+                    "type": "string"
+                },
+                "userID": {
                     "type": "integer"
                 }
             }

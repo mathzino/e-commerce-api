@@ -8,7 +8,7 @@ type (
     // AgeRatingCategory
     Discussion struct {
         ID          int      	`gorm:"primary_key" json:"id"`
-        Discussion string    	`json:"discussion"`
+        DiscussionValue string    	`json:"discussion_value"`
 		UserID		uint     	`json:"userID"`
 		ProductID	uint		`json:"productID"`
         CreatedAt   time.Time 	`json:"created_at"`
