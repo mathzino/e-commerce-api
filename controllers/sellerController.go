@@ -20,7 +20,7 @@ type sellerInput struct {
 // @Description Get a list of Seller.
 // @Tags Product
 // @Produce json
-// @Success 200 {object} []models.Product
+// @Success 200 {object} []models.Seller
 // @Router /seller [get]
 func GetAllSeleer(c *gin.Context) {
     // get db from gin context
@@ -119,7 +119,7 @@ func UpdateSeller(c *gin.Context) {
 // DeleteSeller godoc
 // @Summary Delete one Seller.
 // @Description Delete a Seller by id.
-// @Tags Product
+// @Tags Seller
 // @Param Authorization header string true "Authorization. How to input in swagger : 'Bearer <insert_your_token_here>'"
 // @Security BearerToken
 // @Produce json

@@ -459,7 +459,7 @@
                         "schema": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/models.Product"
+                                "$ref": "#/definitions/models.Seller"
                             }
                         }
                     }
@@ -546,7 +546,7 @@
                     "application/json"
                 ],
                 "tags": [
-                    "Product"
+                    "Seller"
                 ],
                 "summary": "Delete one Seller.",
                 "parameters": [

@@ -392,7 +392,7 @@ paths:
           description: OK
           schema:
             items:
-              $ref: '#/definitions/models.Product'
+              $ref: '#/definitions/models.Seller'
             type: array
       summary: Get all Seller.
       tags:
@@ -450,7 +450,7 @@ paths:
       - BearerToken: []
       summary: Delete one Seller.
       tags:
-      - Product
+      - Seller
     get:
       description: Get an Seller by id.
       parameters:

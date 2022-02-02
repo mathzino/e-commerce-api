@@ -478,7 +478,7 @@ var doc = `{
                         "schema": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/models.Product"
+                                "$ref": "#/definitions/models.Seller"
                             }
                         }
                     }
@@ -565,7 +565,7 @@ var doc = `{
                     "application/json"
                 ],
                 "tags": [
-                    "Product"
+                    "Seller"
                 ],
                 "summary": "Delete one Seller.",
                 "parameters": [
