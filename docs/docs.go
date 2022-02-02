@@ -469,7 +469,7 @@ var doc = `{
                     "application/json"
                 ],
                 "tags": [
-                    "Product"
+                    "Seller"
                 ],
                 "summary": "Get all Seller.",
                 "responses": {
@@ -533,7 +533,7 @@ var doc = `{
                     "application/json"
                 ],
                 "tags": [
-                    "Product"
+                    "Seller"
                 ],
                 "summary": "Get Seller.",
                 "parameters": [

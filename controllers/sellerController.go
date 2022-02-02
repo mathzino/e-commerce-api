@@ -18,7 +18,7 @@ type sellerInput struct {
 // GetAllSeller godoc
 // @Summary Get all Seller.
 // @Description Get a list of Seller.
-// @Tags Product
+// @Tags Seller
 // @Produce json
 // @Success 200 {object} []models.Seller
 // @Router /seller [get]
@@ -59,7 +59,7 @@ func CreateSeller(c *gin.Context) {
 // GetSellerById godoc
 // @Summary Get Seller.
 // @Description Get an Seller by id.
-// @Tags Product
+// @Tags Seller
 // @Produce json
 // @Param id path string true "Seller id"
 // @Success 200 {object} models.Seller

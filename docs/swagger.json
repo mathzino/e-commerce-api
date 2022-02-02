@@ -450,7 +450,7 @@
                     "application/json"
                 ],
                 "tags": [
-                    "Product"
+                    "Seller"
                 ],
                 "summary": "Get all Seller.",
                 "responses": {
@@ -514,7 +514,7 @@
                     "application/json"
                 ],
                 "tags": [
-                    "Product"
+                    "Seller"
                 ],
                 "summary": "Get Seller.",
                 "parameters": [
