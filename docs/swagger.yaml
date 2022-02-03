@@ -22,6 +22,13 @@ definitions:
     - password
     - username
     type: object
+  controllers.cartItemInput:
+    properties:
+      product_id:
+        type: integer
+      user_id:
+        type: integer
+    type: object
   controllers.discussionInput:
     properties:
       discussion_value:
@@ -56,6 +63,19 @@ definitions:
       store_name:
         type: string
       user_id:
+        type: integer
+    type: object
+  models.CartItem:
+    properties:
+      created_at:
+        type: string
+      id:
+        type: integer
+      productID:
+        type: integer
+      updated_at:
+        type: string
+      userID:
         type: integer
     type: object
   models.Discussion:
@@ -128,6 +148,124 @@ info:
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: http://swagger.io/terms/
 paths:
+  /cart-item:
+    get:
+      description: Get a list of CartItem.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.CartItem'
+            type: array
+      summary: Get all CartItem.
+      tags:
+      - CartItem
+    post:
+      description: create new CartItem
+      parameters:
+      - description: the body to create new cartItem
+        in: body
+        name: Body
+        required: true
+        schema:
+          $ref: '#/definitions/controllers.cartItemInput'
+      - description: 'Authorization. How to input in swagger : ''Bearer <insert_your_token_here>'''
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.CartItem'
+      security:
+      - BearerToken: []
+      summary: Create CartItem
+      tags:
+      - CartItem
+  /cart-item/{id}:
+    delete:
+      description: Delete a CartItem by id.
+      parameters:
+      - description: 'Authorization. How to input in swagger : ''Bearer <insert_your_token_here>'''
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: CartItem id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: boolean
+            type: object
+      security:
+      - BearerToken: []
+      summary: Delete one CartItem.
+      tags:
+      - CartItem
+    get:
+      description: Get an CartItem by id.
+      parameters:
+      - description: CartItem id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.CartItem'
+      summary: Get CartItem.
+      tags:
+      - CartItem
+    patch:
+      description: Update CartItem by id.
+      parameters:
+      - description: 'Authorization. How to input in swagger : ''Bearer <insert_your_token_here>'''
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: CartItem id
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: the body to update cartItem
+        in: body
+        name: Body
+        required: true
+        schema:
+          $ref: '#/definitions/controllers.cartItemInput'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.CartItem'
+      security:
+      - BearerToken: []
+      summary: Update CartItem.
+      tags:
+      - CartItem
   /discussion:
     get:
       description: Get a list of Discussion.

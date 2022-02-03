@@ -22,7 +22,7 @@ type (
         UpdatedAt   time.Time       `json:"updated_at"`
         Discussion  []Discussion    `json:"-"`
         CartItem    []CartItem      `json:"-"`
-        Transaction []Transaction      `json:"-"`
+        // Transaction []Transaction      `json:"-"`
         Seller      Seller           `json:"-"`
     }
 )

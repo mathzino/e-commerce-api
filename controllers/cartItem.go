@@ -11,129 +11,129 @@ import (
 )
 
 type cartItemInput struct {
-    StoreName        		string `json:"store_name"`
+    ProductID        		uint `json:"product_id"`
     UserID                  uint   `json:"user_id"`
 }
 
-// GetAllSeller godoc
-// @Summary Get all Seller.
-// @Description Get a list of Seller.
-// @Tags Seller
+// GetAllCartItem godoc
+// @Summary Get all CartItem.
+// @Description Get a list of CartItem.
+// @Tags CartItem
 // @Produce json
-// @Success 200 {object} []models.Seller
-// @Router /seller [get]
+// @Success 200 {object} []models.CartItem
+// @Router /cart-item [get]
 func GetAllCartItem(c *gin.Context) {
     // get db from gin context
     db := c.MustGet("db").(*gorm.DB)
-    var sellers []models.Seller
-    db.Find(&sellers)
+    var cartItem []models.CartItem
+    db.Find(&cartItem)
 
-    c.JSON(http.StatusOK, gin.H{"data": sellers})
+    c.JSON(http.StatusOK, gin.H{"data": cartItem})
 }
 
-// Create a Seller godoc
-// @Summary Create Seller
-// @Description create new Seller
-// @Tags Seller
-// @Param Body body sellerInput true "the body to create new seller"
+// Create a CartItem godoc
+// @Summary Create CartItem
+// @Description create new CartItem
+// @Tags CartItem
+// @Param Body body cartItemInput true "the body to create new cartItem"
 // @Param Authorization header string true "Authorization. How to input in swagger : 'Bearer <insert_your_token_here>'"
 // @Security BearerToken
 // @Produce json
-// @Success 200 {object} models.Seller
-// @Router /seller [post]
+// @Success 200 {object} models.CartItem
+// @Router /cart-item [post]
 func CreateCartItem(c *gin.Context) {
-    var input sellerInput
+    var input cartItemInput
 
     if err := c.ShouldBindJSON(&input); err != nil {
         c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
         return
     }
 
-    seller := models.Seller{StoreName: input.StoreName,UserID:input.UserID}
+    cartItem := models.CartItem{ProductID: input.ProductID,UserID:input.UserID}
     // get db from gin context
     db := c.MustGet("db").(*gorm.DB)
 
-    db.Create(&seller)
-    c.JSON(http.StatusOK, gin.H{"data": seller})
+    db.Create(&cartItem)
+    c.JSON(http.StatusOK, gin.H{"data": cartItem})
 }
-// GetSellerById godoc
-// @Summary Get Seller.
-// @Description Get an Seller by id.
-// @Tags Seller
+// GetCartItemByIdUser godoc
+// @Summary Get CartItem.
+// @Description Get an CartItem by id.
+// @Tags CartItem
 // @Produce json
-// @Param id path string true "Seller id"
-// @Success 200 {object} models.Seller
-// @Router /seller/{id} [get]
-func GetCartItemById(c *gin.Context) { // Get model if exist
-    var seller models.Seller
+// @Param id path string true "CartItem id"
+// @Success 200 {object} models.CartItem
+// @Router /cart-item/{id} [get]
+func GetCartItemByIdUser(c *gin.Context) { // Get model if exist
+    var cartItem models.CartItem
 
     db := c.MustGet("db").(*gorm.DB)
-    if err := db.Where("id = ?", c.Param("id")).First(&seller).Error; err != nil {
+    if err := db.Where("user_id = ?", c.Param("user_id")).Find(&cartItem).Error; err != nil {
         c.JSON(http.StatusBadRequest, gin.H{"error": "Record not found!"})
         return
     }
 
-    c.JSON(http.StatusOK, gin.H{"data": seller})
+    c.JSON(http.StatusOK, gin.H{"data": cartItem})
 }
 
-// UpdateSeller godoc
-// @Summary Update Seller.
-// @Description Update Seller by id.
-// @Tags Seller
+// UpdateCartItem godoc
+// @Summary Update CartItem.
+// @Description Update CartItem by id.
+// @Tags CartItem
 // @Param Authorization header string true "Authorization. How to input in swagger : 'Bearer <insert_your_token_here>'"
 // @Security BearerToken
 // @Produce json
-// @Param id path string true "Seller id"
-// @Param Body body sellerInput true "the body to update seller"
-// @Success 200 {object} models.Seller
-// @Router /seller/{id} [patch]
+// @Param id path string true "CartItem id"
+// @Param Body body cartItemInput true "the body to update cartItem"
+// @Success 200 {object} models.CartItem
+// @Router /cart-item/{id} [patch]
 func UpdateCartItem(c *gin.Context) {
 
     db := c.MustGet("db").(*gorm.DB)
     // Get model if exist
-    var seller models.Seller
-    if err := db.Where("id = ?", c.Param("id")).First(&seller).Error; err != nil {
+    var cartItem models.CartItem
+    if err := db.Where("id = ?", c.Param("id")).First(&cartItem).Error; err != nil {
         c.JSON(http.StatusBadRequest, gin.H{"error": "Record not found!"})
         return
     }
 
     // Validate input
-    var input sellerInput
+    var input cartItemInput
     if err := c.ShouldBindJSON(&input); err != nil {
         c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
         return
     }
 
-    var updatedInput models.Seller
-    updatedInput.StoreName = input.StoreName
+    var updatedInput models.CartItem
+    updatedInput.ProductID = input.ProductID
     updatedInput.UserID = input.UserID
     updatedInput.UpdatedAt = time.Now()
 
-    db.Model(&seller).Updates(updatedInput)
+    db.Model(&cartItem).Updates(updatedInput)
 
-    c.JSON(http.StatusOK, gin.H{"data": seller})
+    c.JSON(http.StatusOK, gin.H{"data": cartItem})
 }
 
-// DeleteSeller godoc
-// @Summary Delete one Seller.
-// @Description Delete a Seller by id.
-// @Tags Seller
+// DeleteCartItem godoc
+// @Summary Delete one CartItem.
+// @Description Delete a CartItem by id.
+// @Tags CartItem
 // @Param Authorization header string true "Authorization. How to input in swagger : 'Bearer <insert_your_token_here>'"
 // @Security BearerToken
 // @Produce json
-// @Param id path string true "Seller id"
+// @Param id path string true "CartItem id"
 // @Success 200 {object} map[string]boolean
-// @Router /seller/{id} [delete]
+// @Router /cart-item/{id} [delete]
 func DeleteCartItem(c *gin.Context) {
     // Get model if exist
     db := c.MustGet("db").(*gorm.DB)
-    var seller models.Seller
-    if err := db.Where("id = ?", c.Param("id")).First(&seller).Error; err != nil {
+    var cartItem models.CartItem
+    if err := db.Where("id = ?", c.Param("id")).First(&cartItem).Error; err != nil {
         c.JSON(http.StatusBadRequest, gin.H{"error": "Record not found!"})
         return
     }
 
-    db.Delete(&seller)
+    db.Delete(&cartItem)
 
     c.JSON(http.StatusOK, gin.H{"data": true})
 }

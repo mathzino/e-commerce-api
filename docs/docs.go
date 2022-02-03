@@ -32,6 +32,189 @@ var doc = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
+        "/cart-item": {
+            "get": {
+                "description": "Get a list of CartItem.",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "CartItem"
+                ],
+                "summary": "Get all CartItem.",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/models.CartItem"
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "security": [
+                    {
+                        "BearerToken": []
+                    }
+                ],
+                "description": "create new CartItem",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "CartItem"
+                ],
+                "summary": "Create CartItem",
+                "parameters": [
+                    {
+                        "description": "the body to create new cartItem",
+                        "name": "Body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/controllers.cartItemInput"
+                        }
+                    },
+                    {
+                        "type": "string",
+                        "description": "Authorization. How to input in swagger : 'Bearer \u003cinsert_your_token_here\u003e'",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.CartItem"
+                        }
+                    }
+                }
+            }
+        },
+        "/cart-item/{id}": {
+            "get": {
+                "description": "Get an CartItem by id.",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "CartItem"
+                ],
+                "summary": "Get CartItem.",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "CartItem id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.CartItem"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "security": [
+                    {
+                        "BearerToken": []
+                    }
+                ],
+                "description": "Delete a CartItem by id.",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "CartItem"
+                ],
+                "summary": "Delete one CartItem.",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization. How to input in swagger : 'Bearer \u003cinsert_your_token_here\u003e'",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "CartItem id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "boolean"
+                            }
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "security": [
+                    {
+                        "BearerToken": []
+                    }
+                ],
+                "description": "Update CartItem by id.",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "CartItem"
+                ],
+                "summary": "Update CartItem.",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization. How to input in swagger : 'Bearer \u003cinsert_your_token_here\u003e'",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "CartItem id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "the body to update cartItem",
+                        "name": "Body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/controllers.cartItemInput"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.CartItem"
+                        }
+                    }
+                }
+            }
+        },
         "/discussion": {
             "get": {
                 "description": "Get a list of Discussion.",
@@ -864,6 +1047,17 @@ var doc = `{
                 }
             }
         },
+        "controllers.cartItemInput": {
+            "type": "object",
+            "properties": {
+                "product_id": {
+                    "type": "integer"
+                },
+                "user_id": {
+                    "type": "integer"
+                }
+            }
+        },
         "controllers.discussionInput": {
             "type": "object",
             "properties": {
@@ -916,6 +1110,26 @@ var doc = `{
                     "type": "string"
                 },
                 "user_id": {
+                    "type": "integer"
+                }
+            }
+        },
+        "models.CartItem": {
+            "type": "object",
+            "properties": {
+                "created_at": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "productID": {
+                    "type": "integer"
+                },
+                "updated_at": {
+                    "type": "string"
+                },
+                "userID": {
                     "type": "integer"
                 }
             }

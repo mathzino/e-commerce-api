@@ -12,7 +12,7 @@ type (
         UserID      uint            `json:"userID"`
         CreatedAt   time.Time       `json:"created_at"`
         UpdatedAt   time.Time       `json:"updated_at"`
-        Transaction []Transaction    `json:"-"`
+        // Transaction []Transaction    `json:"-"`
 		Product		[]Product		`json:"-"`
        
     }

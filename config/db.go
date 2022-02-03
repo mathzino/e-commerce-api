@@ -28,7 +28,7 @@ func ConnectDatabase() *gorm.DB {
             panic(err.Error())
         }
 
-        db.AutoMigrate(&models.User{}, &models.Cart{}, &models.CartItem{}, &models.ProductCategory{}, &models.Discussion{}, &models.Product{}, &models.Transaction{})
+        db.AutoMigrate(&models.User{},  &models.CartItem{}, &models.ProductCategory{}, &models.Discussion{}, &models.Product{} /*, &models.Transaction{}*/)
 
         return db
     } else {
@@ -45,7 +45,7 @@ func ConnectDatabase() *gorm.DB {
             panic(err.Error())
         }
 
-        db.AutoMigrate(&models.User{}, &models.Cart{}, &models.CartItem{}, &models.ProductCategory{}, &models.Discussion{}, &models.Product{}, &models.Transaction{})
+        db.AutoMigrate(&models.User{}, &models.CartItem{}, &models.ProductCategory{}, &models.Discussion{}, &models.Product{}/*, &models.Transaction{}*/)
 
         return db
     }
