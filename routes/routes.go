@@ -52,7 +52,7 @@ func SetupRouter(db *gorm.DB) *gin.Engine {
     SellerMiddlewareRoute.PATCH("/:id", controllers.UpdateSeller)
     SellerMiddlewareRoute.DELETE("/:id", controllers.DeleteSeller)
 
-    r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
+   
 //cart item
     r.GET("/cart-item", controllers.GetAllCartItem)
     r.GET("/cart-item/:id", controllers.GetCartItemByIdUser)
